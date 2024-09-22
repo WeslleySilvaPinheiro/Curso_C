@@ -1,0 +1,275 @@
+EXERCICIO 1;
+
+#include <stdio.h>
+
+int main(){
+	
+	int numero, quantidade=0, soma=0, media, maior_numero=0, menor_numero=10000, numero_par=0, media_par=0, numero_impar=0, soma_impar=0;
+	float porcentagem_impar;
+	
+	while(1){
+		printf("Digite um numero [0 para sair]: ");
+		scanf("%d", &numero);
+		
+		if(numero == 0)
+			break;
+			
+		if(numero < 0){
+			printf("\nErro numero menor que 0.\n");
+			continue;
+		}
+		
+		if(numero > maior_numero)
+			maior_numero = numero;
+			
+		if(numero < menor_numero)
+			menor_numero = numero;
+		
+		if(numero % 2 == 0){
+			numero_par+= numero;
+			media_par++;
+		}else{
+			soma_impar+=numero;
+			numero_impar++;
+		}
+		
+		quantidade ++;
+		soma+=numero;
+		
+		if(quantidade > 0)
+			porcentagem_impar = (float)numero_impar / quantidade * 100;
+		else
+			porcentagem_impar = 0;
+	}
+	
+	printf("\n\tO a soma dos numeros: %d", soma);
+	printf("\n\tA quantidade de numeros digitados: %d", quantidade);
+	printf("\n\tA media dos numeros digitados: %d", soma/quantidade);
+	printf("\n\tO maior numero: %d", maior_numero);
+	printf("\n\tO menor numero: %d", menor_numero);
+	
+	if(media_par > 0)
+		printf("\n\tA media dos numeros pares: %d", numero_par/media_par);
+	else
+		printf("\n\tNenhum numero par foi digitao.");
+		
+	printf("\n\tA porcentagem dos numeros impares: %.2f", porcentagem_impar);
+	
+	return 0;
+}
+
+====================================================================================
+EXERCÍCIO 2;
+
+#include <stdio.h>
+
+int main(){
+    
+    int i, fatorial, numero;
+    char opcao;
+    
+    do{
+        i=1;
+        fatorial=1;
+        
+        printf("Digite o numero: ");
+        scanf("%d", &numero);
+        
+        while(i <= numero){
+            fatorial *= i;
+            i++;
+        }
+        
+        printf("\nO fatorial de %d: %d", numero, fatorial);
+        
+        printf("\nDeseja calcular outro fatorial? (s/n): ");
+        scanf(" %c", &opcao);
+        
+    }while (opcao == 's' || opcao == 'S');
+    
+    return 0;
+}
+
+====================================================================================
+EXERCÍCIO 3;
+
+#include <stdio.h>
+
+int main(){
+	
+	int numeros, comprimento=0;
+	int n1,n2,n3,n4;
+	int aux;
+	char opc;
+	
+	do{
+		
+		printf("\nDigite um numero de 4 digitos: ");
+		scanf("%d", &numeros);
+		
+		comprimento = 0;
+		
+		n1 = (numeros%10) + 7; // aqui peguei os dpigitos e fiz uma adição direta do 7 em cada um
+		n2 = (numeros%100 / 10) + 7;
+		n3 = (numeros%1000 / 100) + 7;
+		n4 = (numeros%10000 / 1000) + 7;
+		
+		while(numeros != 0){ // esse while serve para pegar ir removendo cada digito dividindo por 10 e a cada iteração ir adicionando para fazer um contador;
+			numeros /= 10;
+			comprimento++; // o contador precisa ser 4 então aqui nos vamos tirando cada um totalizando 4 no final
+		}
+		
+		if(comprimento == 4){ // se o comprimento for 4 então temos a entrada correta e fazemos a criptografia com as trocas 
+			printf("\n\tNumeros dentro do esperado.");
+			printf("\n\t%d %d %d %d", n4, n3, n2, n1); // aqui printamos a senha padrão somente para poder confirmar a execução do programa
+			
+			aux = n3;
+			n3 = n1;
+			n1 = aux;
+			
+			aux = n2;
+			n2 = n4;
+			n4 = aux;
+			
+			printf("\n\tSenha criptografada."); // aqui printamos a nova criptografia com as trocas 
+			printf("\n\t%d %d %d %d", n4, n3, n2, n1);
+			
+		}else{
+			printf("\nNumeros invalidos.\n");
+		}
+		
+		printf("\n\nDeseja continuar [S/N]: "); // opção de quebrar o sistema será decidida aqui com o controle de continuar a condição do DO.
+		scanf(" %c", &opc);
+		
+	}while(opc == 's' || opc == 'S');
+	
+	return 0;
+	
+}
+====================================================================================
+EXERCICIO 4;
+
+#include <stdio.h>
+
+int main(){
+	
+	double i=0, n=4, numero=0, constante=4, m=3;
+	int contador=2, termos_para_pi;
+	
+	do{
+		if(contador %2 == 0){
+			//printf("\nmenos");
+			numero= constante / m ;
+			n -= numero;
+			printf("\n%.4f", numero);
+		}else{
+			//printf("\nmais");
+			numero= constante / m ;
+			n +=  numero;
+			printf("\n%.4f", numero);
+		}
+		
+		if (termos_para_pi == 0 && (int)(n * 100000) == 314159) {
+            termos_para_pi = contador;
+            break;
+		}
+		
+		i++;
+		m+=2;
+		contador++;
+		
+	}while(i<150000);
+	
+	printf("\n\tcontador: %.f numero: %.4lf", i, n);
+
+}
+====================================================================================
+EXERCÍCIO 5;
+
+#include <stdio.h>
+
+int main(){
+	
+	int n, i=1;
+	double fatorial=1.0, e=1.0;
+	char continuar;
+	
+	do{
+		printf("Digite um numero: ");
+		scanf("%d", &n);
+		
+		i = 1;
+		fatorial = 1.0;
+		e = 1.0;
+		
+		while(i<=n){
+			fatorial *= i;
+			e += (1 / fatorial);
+			i++;
+		}
+		
+		//printf("\n%d", fatorial);
+		printf("\n%.10f", e);
+		
+		printf("\nDeseja continuar [S/N]: ");
+		scanf(" %c", &continuar);
+		
+	}while(continuar == 's' || continuar == 'S');
+	
+}
+====================================================================================
+EXERCÍCIO 6;
+
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    double x, soma = 0.0, termo;
+    int n = 0, iteracao=0;
+    long double fatorial = 1.0;
+
+    printf("Digite o valor de x (em radianos): ");
+    scanf("%lf", &x);
+
+    do {
+        termo = pow(-1, n) * pow(x, 2 * n) / fatorial;
+        soma += termo;
+
+        n++;
+        fatorial *= (2 * n - 1) * (2 * n); 
+        
+		iteracao+=1;
+
+    } while (termo > 0.000001 || termo < -0.000001);
+
+    printf("Cosseno de %.7lf: %.7lf\n", x, soma);
+    printf("\n\tQTD ITERACAO: %d", iteracao);
+    
+    return 0;
+}
+====================================================================================
+EXERCÍCIO 7;
+
+#include <stdio.h>
+#include <math.h>
+
+int main(){
+	
+	double n, k, k_anterior, i=12, a=0, tolerancia= 0.000001; //double para precisão
+	
+	printf("Digite qual raiz quer saber: ");
+	scanf("%lf", &n);
+	
+	printf("\n\tA raiz de %.2lf: %.2lf", n, sqrt(n));
+	
+	k = n /2.0;
+	
+	do{
+		k_anterior = k; //armazenar o k anterior
+		k = 0.5 * (k_anterior + n / k_anterior);
+	} while ((k - k_anterior > tolerancia) || (k_anterior - k > tolerancia));
+	
+	printf("\n\tAproximacao da raiz quadrada de %.2lf: %.6lf\n", n, k);
+}
+
+====================================================================================
